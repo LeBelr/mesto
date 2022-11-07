@@ -1,0 +1,18 @@
+.cards__like-button {
+  margin: 0 20px 0 0;
+  background-image: url(../../../images/like-buttonDisabled.svg);
+  background-color: #fff;
+  width: 22px;
+  height: 19px;
+  border: none;
+  transition: opacity .3s linear;
+}
+
+.cards__like-button:hover {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.cards__like-button:active {
+  background-image: url(../../../images/like-buttonActive.svg);
+}
