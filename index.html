@@ -14,74 +14,76 @@
     <header class="header">
       <a href="#" class="header__logo"></a>
     </header>
-    <section class="profile">
-      <div class="profile__element">
-        <div class="profile__avatar"></div>
-        <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
-          <p class="profile__about">Исследователь океана</p>
+    <main>
+      <section class="profile">
+        <div class="profile__element">
+          <div class="profile__avatar"></div>
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__edit-button"></button>
+            <p class="profile__about">Исследователь океана</p>
+          </div>
         </div>
-      </div>
-      <button class="profile__add-button"></button>
-    </section>
-    <section class="places">
-      <ul class="cards">
-        <li class="cards__item">
-          <img src="./images/karachaevsk.png" alt="Заброшеный храм в горах" class="cards__image">
-          <div class="cards__box-title">
-            <h2 class="cards__title">Карачаевск</h2>
-            <button class="cards__like-button"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img src="./images/elbrus.png" alt="Гора вдалеке" class="cards__image">
-          <div class="cards__box-title">
-            <h2 class="cards__title">Гора Эльбрус</h2>
-            <button class="cards__like-button"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img src="./images/dombai.png" alt="Гора рядом с лесом" class="cards__image">
-          <div class="cards__box-title">
-            <h2 class="cards__title">Домбай</h2>
-            <button class="cards__like-button"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img src="./images/elbrus.png" alt="Гора вдалеке" class="cards__image">
-          <div class="cards__box-title">
-            <h2 class="cards__title">Гора Эльбрус</h2>
-            <button class="cards__like-button"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img src="./images/dombai.png" alt="Гора рядом с лесом" class="cards__image">
-          <div class="cards__box-title">
-            <h2 class="cards__title">Домбай</h2>
-            <button class="cards__like-button"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img src="./images/karachaevsk.png" alt="Заброшеный храм в горах" class="cards__image">
-          <div class="cards__box-title">
-            <h2 class="cards__title">Карачаево-Черкесия</h2>
-            <button class="cards__like-button"></button>
-          </div>
-        </li>
-      </ul>
-    </section>
+        <button type="button" class="profile__add-button"></button>
+      </section>
+      <section class="places">
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/karachaevsk.png" alt="Заброшеный храм в горах" class="cards__image">
+            <div class="cards__box-title">
+              <h2 class="cards__title">Карачаевск</h2>
+              <button type="button" class="cards__like-button"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img src="./images/elbrus.png" alt="Гора вдалеке" class="cards__image">
+            <div class="cards__box-title">
+              <h2 class="cards__title">Гора Эльбрус</h2>
+              <button type="button" class="cards__like-button"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img src="./images/dombai.png" alt="Гора рядом с лесом" class="cards__image">
+            <div class="cards__box-title">
+              <h2 class="cards__title">Домбай</h2>
+              <button type="button" class="cards__like-button"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img src="./images/elbrus.png" alt="Гора вдалеке" class="cards__image">
+            <div class="cards__box-title">
+              <h2 class="cards__title">Гора Эльбрус</h2>
+              <button type="button" class="cards__like-button"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img src="./images/dombai.png" alt="Гора рядом с лесом" class="cards__image">
+            <div class="cards__box-title">
+              <h2 class="cards__title">Домбай</h2>
+              <button type="button" class="cards__like-button"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img src="./images/karachaevsk.png" alt="Заброшеный храм в горах" class="cards__image">
+            <div class="cards__box-title">
+              <h2 class="cards__title">Карачаево-Черкесия</h2>
+              <button type="button" class="cards__like-button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
     <div class="popup">
       <div class="popup__content">
-        <button class="popup__close"></button>
+        <button type="button" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm">
           <input type="text" class="popup__name" name="popupName" placeholder="Имя">
           <input type="text" class="popup__about" name="popupAbout" placeholder="О себе">
-          <input type="submit" class="popup__submit" name="popupSubmit" value="Сохранить">
+          <button type="submit" class="popup__submit">Сохранить</button>
         </form>
       </div>
     </div>

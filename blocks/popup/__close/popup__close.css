@@ -1,4 +1,6 @@
 .popup__close {
+  border: 0;
+  padding: 0;
   position: absolute;
   top: -40px;
   right: -40px;
@@ -8,7 +10,6 @@
   background-repeat: no-repeat;
   background-color: transparent;
   background-size: contain;
-  border: none;
   transition: opacity .3s linear;
 }
 
