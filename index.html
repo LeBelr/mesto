@@ -28,67 +28,56 @@
       </section>
       <section class="places">
         <ul class="cards">
-          <li class="cards__item">
-            <img src="./images/karachaevsk.png" alt="Заброшеный храм в горах" class="cards__image">
-            <div class="cards__box-title">
-              <h2 class="cards__title">Карачаевск</h2>
-              <button type="button" class="cards__like-button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/elbrus.png" alt="Гора вдалеке" class="cards__image">
-            <div class="cards__box-title">
-              <h2 class="cards__title">Гора Эльбрус</h2>
-              <button type="button" class="cards__like-button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/dombai.png" alt="Гора рядом с лесом" class="cards__image">
-            <div class="cards__box-title">
-              <h2 class="cards__title">Домбай</h2>
-              <button type="button" class="cards__like-button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/elbrus.png" alt="Гора вдалеке" class="cards__image">
-            <div class="cards__box-title">
-              <h2 class="cards__title">Гора Эльбрус</h2>
-              <button type="button" class="cards__like-button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/dombai.png" alt="Гора рядом с лесом" class="cards__image">
-            <div class="cards__box-title">
-              <h2 class="cards__title">Домбай</h2>
-              <button type="button" class="cards__like-button"></button>
-            </div>
-          </li>
-          <li class="cards__item">
-            <img src="./images/karachaevsk.png" alt="Заброшеный храм в горах" class="cards__image">
-            <div class="cards__box-title">
-              <h2 class="cards__title">Карачаево-Черкесия</h2>
-              <button type="button" class="cards__like-button"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_type_edit">
       <div class="popup__content">
-        <button type="button" class="popup__close"></button>
+        <button type="button" class="popup__close popup__close_type_edit"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm">
-          <input type="text" class="popup__name" name="popupName" placeholder="Имя">
-          <input type="text" class="popup__about" name="popupAbout" placeholder="О себе">
+          <input type="text" class="popup__name popup__name_type_edit" name="popupName" placeholder="Имя">
+          <input type="text" class="popup__about popup__about_type_edit" name="popupAbout" placeholder="О себе">
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
       </div>
     </div>
+    <div class="popup popup_type_add">
+      <div class="popup__content">
+        <button type="button" class="popup__close popup__close_type_add"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popupForm">
+          <input type="text" class="popup__name popup__name_type_add" name="popupTitle" placeholder="Название">
+          <input type="text" class="popup__about popup__about_type_add" name="popupLink" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_image">
+      <div class="popup__image-box">
+        <img src="" alt="" class="popup__image">
+        <button type="button" class="popup__close popup__close_type_image"></button>
+        <p class="popup__image-title"></p>
+      </div>
+    </div>
   </div>
+
   <script src="./scripts/index.js" defer></script>
+
+  <template id="card-template">
+    <li class="cards__item">
+      <img src="" alt="" class="cards__image">
+      <button type="button" class="cards__delete-button"></button>
+      <div class="cards__box-title">
+        <h2 class="cards__title"></h2>
+        <button type="button" class="cards__like-button"></button>
+      </div>
+    </li>
+  </template>>
+
 </body>
 
 </html>
