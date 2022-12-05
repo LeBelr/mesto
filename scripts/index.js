@@ -1,11 +1,17 @@
-const profileEdit = document.querySelector('.profile__edit-button'); //Находим кнопку редактирования
-const popupEditProfile = document.querySelector('.popup_type_edit'); //Находим кнопку попап
-const popupCloseEdit = popupEditProfile.querySelector('.popup__close_type_edit'); //Находим кнопку закрытия
-const popupNameEdit = popupEditProfile.querySelector('.popup__name_type_edit'); //Находим поле ввода имени в попапе
+const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button'); //Находим кнопку редактирования
+const popupEditProfile = document.querySelector('.popup_type_edit'); //Находим попап
+const buttonClosePopupEditProfile = popupEditProfile.querySelector('.popup__close_type_edit'); //Находим кнопку закрытия
+const popupEditName = popupEditProfile.querySelector('.popup__input_type_edit-profile-name'); //Находим поле ввода имени в попапе
 const profileName = document.querySelector('.profile__name'); //Находим имя профиля на странице
+const popupFormEdit = document.querySelector('.popup__form_type_edit')
 
-const popupAboutEdit = popupEditProfile.querySelector('.popup__about_type_edit'); //Находим поле ввода о себе в попапе
+const popupEditAbout = popupEditProfile.querySelector('.popup__input_type_edit-profile-about'); //Находим поле ввода о себе в попапе
 const profileAbout = document.querySelector('.profile__about'); //Находим о себе профиля на странице
+
+//Заполнение полей попапа, необходимое для правильной валидации при открытии попапа
+
+popupEditName.value = profileName.textContent;
+popupEditAbout.value = profileAbout.textContent;
 
 // Функции для открытия и закрытия попапов
 
@@ -17,20 +23,20 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 }
 
-profileEdit.addEventListener('click', () => { //Команда по клику для кнопки редактирования
+buttonOpenPopupEditProfile.addEventListener('click', () => { //Команда по клику для кнопки редактирования
   openPopup(popupEditProfile); //Добавление класса попапу, чтобы он появился на странице
-  popupNameEdit.value = profileName.textContent; //Команда, которая заполняет поле ввода имени в попапе именем профиля на странице
-  popupAboutEdit.value = profileAbout.textContent; //Команда, которая заполняетполе ввода о себе в попапе тем, что содержится в "о себе" профиля на странице
+  popupEditName.value = profileName.textContent; //Команда, которая заполняет поле ввода имени в попапе именем профиля на странице
+  popupEditAbout.value = profileAbout.textContent; //Команда, которая заполняетполе ввода о себе в попапе тем, что содержится в "о себе" профиля на странице
 });
 
-popupCloseEdit.addEventListener('click', () => { //Команда по клику для кнопки закрытия
+buttonClosePopupEditProfile.addEventListener('click', () => { //Команда по клику для кнопки закрытия
   closePopup(popupEditProfile); //Удаление класса попапу, чтобы он закрылся на странице
 });
 
 function submitEditProfile(evt) { //Функция для кнопки сохранения
   evt.preventDefault(); //Отмена свойств
-  profileName.textContent = popupNameEdit.value; //Команда, которая будет заменять имя профиля текстом из поля ввода имени в попапе
-  profileAbout.textContent = popupAboutEdit.value; //Команда, которая будет заменять "о себе" текстом из поля ввода "о себе" в попапе
+  profileName.textContent = popupEditName.value; //Команда, которая будет заменять имя профиля текстом из поля ввода имени в попапе
+  profileAbout.textContent = popupEditAbout.value; //Команда, которая будет заменять "о себе" текстом из поля ввода "о себе" в попапе
   closePopup(popupEditProfile); //Удаление класса попапу, чтобы он закрылся на странице
 };
 
@@ -43,32 +49,34 @@ const cardTemplate = document.querySelector('#card-template').content.querySelec
 
 // Функция для удаления ближайшего элемента с классом cards__item
 
-const handleDeleteCard = (evt) => {
-  evt.preventDefault();
-  evt.target.closest('.cards__item').remove();
-};
+cards.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('cards__delete-button')) {
+    evt.target.closest('.cards__item').remove();
+  }
+});
 
 // Функция для изменения лайка
 
-const handleLikeCard = (evt) => {
-  evt.preventDefault();
-  evt.target.classList.toggle('cards__like-button_active');
-};
+cards.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('cards__like-button')) {
+    evt.target.classList.toggle('cards__like-button_active');
+  }
+});
 
 // Команды для поиска элементов попапа с картинкой
 
 const popupTypeImage = document.querySelector('.popup_type_image');
-const popupCloseImage = document.querySelector('.popup__close_type_image');
+const buttonClosePopupTypeImage = document.querySelector('.popup__close_type_image');
 const popupImage = document.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
 
 // Функция для закрытия попапа
 
-popupCloseImage.addEventListener('click', () => {
+buttonClosePopupTypeImage.addEventListener('click', () => {
   closePopup(popupTypeImage);
 });
 
-// Функция, в которой клонируется карточка, заполняется содержимым из массива, добавляются команды: кнопке удаления, кнопке лайка, открытие попапа при нажатии на картинку
+// Функция, в которой клонируется карточка, заполняется содержимым из массива
 
 const generateCard = (dataCard) => {
   const cardItem = cardTemplate.cloneNode(true);
@@ -79,23 +87,19 @@ const generateCard = (dataCard) => {
   image.src = dataCard.link;
   image.alt = dataCard.name;
 
-  const deleteButton = cardItem.querySelector('.cards__delete-button');
-  deleteButton.addEventListener('click', handleDeleteCard);
-
-  const likeButton = cardItem.querySelector('.cards__like-button');
-  likeButton.addEventListener('click', handleLikeCard);
-
-  const cardImage = cardItem.querySelector('.cards__image');
-  cardImage.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    openPopup(popupTypeImage);
-    popupImage.src = cardImage.src;
-    popupImage.alt = dataCard.name;
-    popupImageTitle.textContent = dataCard.name;
-  });
-  
   return cardItem;
 };
+
+// Добавление возможности открытия попапа при нажатии на картинку
+
+cards.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('cards__image')) {
+    openPopup(popupTypeImage);
+    popupImage.src = evt.target.closest('.cards__image').src;
+    popupImageTitle.alt = evt.target.closest('.cards__item').querySelector('.cards__title').textContent;
+    popupImageTitle.textContent = evt.target.closest('.cards__item').querySelector('.cards__title').textContent;
+  }
+})
 
 // Команда для отображения карточек на экране
 
@@ -109,24 +113,24 @@ initialCards.forEach((dataCard) => {
 
 // Команды для поиска кнопки добавления карточки, попапа, кнопки закрытия попапа
 
-const buttonOpenAddCardPopup = document.querySelector('.profile__add-button');
+const buttonOpenPopupAddCard = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add');
-const popupCloseAdd = document.querySelector('.popup__close_type_add');
+const buttonClosePopupAddCard = document.querySelector('.popup__close_type_add');
 
-// Команды для поиска полей ввода попапа
+// Команды для поиска полей ввода попапа и формы
 
-const inputCardName = popupAddCard.querySelector('.popup__name_type_add');
-const inputCardLink = popupAddCard.querySelector('.popup__about_type_add');
-const popupFormAdd = popupAddCard.querySelector('.popup__form');
+const inputCardName = popupAddCard.querySelector('.popup__input_type_add-card-name');
+const inputCardLink = popupAddCard.querySelector('.popup__input_type_add-card-link');
+const popupFormAdd = popupAddCard.querySelector('.popup__form_type_add');
 
 // Команды по нажитию кнопок для открытия и закрытия попапа
 
-buttonOpenAddCardPopup.addEventListener('click', () => {
+buttonOpenPopupAddCard.addEventListener('click', () => {
   openPopup(popupAddCard);
   popupFormAdd.reset();
 });
 
-popupCloseAdd.addEventListener('click', () => {
+buttonClosePopupAddCard.addEventListener('click', () => {
   closePopup(popupAddCard);
 });
 
@@ -143,3 +147,23 @@ const handleAddCard = (evt) => {
 };
 
 popupAddCard.addEventListener('submit', handleAddCard);
+
+//Функция для закрытия попапов при клике на оверлей и при нажатии на Escape
+
+const closePopupOnOverlayAndEscape = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget) {
+        closePopup(popup);
+      };
+    });
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape') {
+        closePopup(popup);
+      };
+    });
+  });
+};
+
+closePopupOnOverlayAndEscape();
