@@ -43,7 +43,7 @@ const isValid = (formElement, inputElement, settings) => {
     showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
     hideInputError(formElement, inputElement, settings);
-  }
+  };
 };
 
 //Добавление валидации для формы

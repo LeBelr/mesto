@@ -2,7 +2,7 @@ const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button
 const popupEditProfile = document.querySelector('.popup_type_edit'); //Находим попап
 const popupEditName = popupEditProfile.querySelector('.popup__input_type_edit-profile-name'); //Находим поле ввода имени в попапе
 const profileName = document.querySelector('.profile__name'); //Находим имя профиля на странице
-const popupFormEdit = document.querySelector('.popup__form_type_edit')
+const popupFormEdit = document.querySelector('.popup__form_type_edit');
 
 const popupEditAbout = popupEditProfile.querySelector('.popup__input_type_edit-profile-about'); //Находим поле ввода о себе в попапе
 const profileAbout = document.querySelector('.profile__about'); //Находим о себе профиля на странице
@@ -18,21 +18,20 @@ function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-  }
+  };
 };
 
 // Функции для открытия и закрытия попапов
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
-  removeErrorsMessages
   document.addEventListener('keydown', closeByEscape)
-}
+};
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
-}
+};
 
 //Объявление переменной для всех попапов и функция для закрытия попапов по крестику
 
@@ -42,10 +41,10 @@ popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
       closePopup(popup);
-    }
+    };
     if (evt.target.classList.contains('popup__close')) {
       closePopup(popup);
-    }
+    };
   });
 });
 
@@ -69,7 +68,7 @@ buttonOpenPopupEditProfile.addEventListener('click', () => { //Команда п
   popupEditName.value = profileName.textContent; //Команда, которая заполняет поле ввода имени в попапе именем профиля на странице
   popupEditAbout.value = profileAbout.textContent; //Команда, которая заполняетполе ввода о себе в попапе тем, что содержится в "о себе" профиля на странице
   removeErrorsMessages(popupEditProfile);
-  popupFormEditSubmit.classList.remove('popup__submit_inactive')
+  popupFormEditSubmit.classList.remove('popup__submit_inactive');
   popupFormEditSubmit.removeAttribute('disabled');
 });
 
@@ -94,7 +93,7 @@ const cardTemplate = document.querySelector('#card-template').content.querySelec
 cards.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('cards__delete-button')) {
     evt.target.closest('.cards__item').remove();
-  }
+  };
 });
 
 // Функция для изменения лайка
@@ -102,7 +101,7 @@ cards.addEventListener('click', (evt) => {
 cards.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('cards__like-button')) {
     evt.target.classList.toggle('cards__like-button_active');
-  }
+  };
 });
 
 // Команды для поиска элементов попапа с картинкой
@@ -133,8 +132,8 @@ cards.addEventListener('click', (evt) => {
     popupImage.src = evt.target.closest('.cards__image').src;
     popupImageTitle.alt = evt.target.closest('.cards__item').querySelector('.cards__title').textContent;
     popupImageTitle.textContent = evt.target.closest('.cards__item').querySelector('.cards__title').textContent;
-  }
-})
+  };
+});
 
 // Команда для отображения карточек на экране
 
@@ -163,7 +162,7 @@ const popupFormAddSubmit = popupAddCard.querySelector('.popup__submit');
 buttonOpenPopupAddCard.addEventListener('click', () => {
   openPopup(popupAddCard);
   popupFormAdd.reset();
-  popupFormAddSubmit.classList.add('popup__submit_inactive')
+  popupFormAddSubmit.classList.add('popup__submit_inactive');
   popupFormAddSubmit.setAttribute('disabled', true);
   removeErrorsMessages(popupAddCard);
 });
