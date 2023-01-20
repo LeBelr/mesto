@@ -1,5 +1,7 @@
-import { initialCards, Card} from './Card.js';
-import {settings, FormValidator } from './FormValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import { initialCards, settings } from '../utils/constants.js';
+import { openPopup, closePopup } from '../utils/utils.js'
 
 const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button'); //Находим кнопку редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //Находим попап
@@ -8,32 +10,6 @@ const profileName = document.querySelector('.profile__name'); //Находим �
 
 const popupEditAbout = popupEditProfile.querySelector('.popup__input_type_edit-profile-about'); //Находим поле ввода о себе в попапе
 const profileAbout = document.querySelector('.profile__about'); //Находим о себе профиля на странице
-
-//Заполнение полей попапа, необходимое для правильной валидации при открытии попапа
-
-popupEditName.value = profileName.textContent;
-popupEditAbout.value = profileAbout.textContent;
-
-//Функция для закрытия попапов при нажатии Escape
-
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  };
-};
-
-// Функции для открытия и закрытия попапов
-
-export const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEscape)
-};
-
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-};
 
 //Объявление переменной для всех попапов и функция для закрытия попапов по крестику
 
@@ -50,28 +26,13 @@ popups.forEach((popup) => {
   });
 });
 
-//Функция для удаления стиля поля с ошибкой и сообщения об ошибке
-
-const removeErrorsMessages = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const errorMessageList = Array.from(formElement.querySelectorAll('.popup__input-error'));
-  inputList.forEach((inputElement) => {
-    inputElement.classList.remove('popup__input_type_error');
-  });
-  errorMessageList.forEach((inputElement) => {
-    inputElement.classList.remove('popup__input-error_active');
-  });
-};
-
-const popupFormEditSubmit = popupEditProfile.querySelector('.popup__submit');
 
 buttonOpenPopupEditProfile.addEventListener('click', () => { //Команда по клику для кнопки редактирования
   openPopup(popupEditProfile); //Добавление класса попапу, чтобы он появился на странице
   popupEditName.value = profileName.textContent; //Команда, которая заполняет поле ввода имени в попапе именем профиля на странице
   popupEditAbout.value = profileAbout.textContent; //Команда, которая заполняетполе ввода о себе в попапе тем, что содержится в "о себе" профиля на странице
-  removeErrorsMessages(popupEditProfile);
-  popupFormEditSubmit.classList.remove('popup__submit_inactive');
-  popupFormEditSubmit.removeAttribute('disabled');
+  validationTypeEdit.removeValidationErrors();
+  validationTypeEdit.enableSubmitButton();
 });
 
 function submitEditProfile(evt) { //Функция для кнопки сохранения
@@ -87,12 +48,19 @@ popupEditProfile.addEventListener('submit', submitEditProfile); //Команда
 
 const cards = document.querySelector('.cards');
 
+// Функция создания карточки
+
+const createCard = (dataCard) => {
+  const card = new Card(dataCard, '#card-template');
+  const cardElement = card.generateCard()
+
+  return cardElement;
+}
+
 // Команда для отображения заготовленных карточек
 
 initialCards.forEach((dataCard) => {
-  const card = new Card(dataCard, '#card-template');
-
-  cards.append(card.generateCard());
+  cards.append(createCard(dataCard));
 });
 
 // Команды для поиска кнопки добавления карточки, попапа
@@ -105,29 +73,19 @@ const popupAddCard = document.querySelector('.popup_type_add');
 const inputCardName = popupAddCard.querySelector('.popup__input_type_add-card-name');
 const inputCardLink = popupAddCard.querySelector('.popup__input_type_add-card-link');
 const popupFormAdd = popupAddCard.querySelector('.popup__form_type_add');
-const popupFormAddSubmit = popupAddCard.querySelector('.popup__submit');
 
 // Команды по нажитию кнопок для открытия
 
 buttonOpenPopupAddCard.addEventListener('click', () => {
   openPopup(popupAddCard);
   popupFormAdd.reset();
-  popupFormAddSubmit.classList.add('popup__submit_inactive');
-  popupFormAddSubmit.setAttribute('disabled', true);
-  removeErrorsMessages(popupAddCard);
+  validationTypeAdd.removeValidationErrors();
+  validationTypeAdd.disableSubmitButton();
 });
-
-// Функция для добавления карточки и ее заполнения
-
-const addCard = (dataCard) => {
-  const card = new Card(dataCard, '#card-template');
-
-  cards.prepend(card.generateCard());
-};
 
 const handleAddCard = (evt) => {
   evt.preventDefault();
-  addCard({ name: inputCardName.value, link: inputCardLink.value });
+  cards.prepend(createCard({ name: inputCardName.value, link: inputCardLink.value }));
   closePopup(popupAddCard);
 };
 

@@ -1,31 +1,4 @@
-import { openPopup } from "./index.js";
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import { openPopup } from "../utils/utils.js";
 
 // Команды для поиска элементов попапа с картинкой
 
@@ -35,7 +8,7 @@ const popupImageTitle = document.querySelector('.popup__image-title');
 
 // Создание класса карточки
 
-class Card {
+export default class Card {
   constructor (dataCard, templateSelector) {
     this._title = dataCard.name;
     this._image = dataCard.link;
@@ -53,9 +26,11 @@ class Card {
   };
 
   _setData() {
+    const cardImage = this._card.querySelector('.cards__image');
+
     this._card.querySelector('.cards__title').textContent = this._title;
-    this._card.querySelector('.cards__image').src = this._image;
-    this._card.querySelector('.cards__image').alt = this._title;
+    cardImage.src = this._image;
+    cardImage.alt = this._title;
   };
 
   // Открытие попапа с картинкой карточки
@@ -105,5 +80,3 @@ class Card {
     return this._card;
   };
 };
-
-export { initialCards, Card}

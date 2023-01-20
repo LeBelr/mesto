@@ -1,14 +1,6 @@
-const settings = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-}
-
 // Создание класса валидации
 
-class FormValidator {
+export default class FormValidator {
   constructor(formSettings, formElement) {
     this._inputSelector = formSettings.inputSelector;
     this._submitButtonSelector = formSettings.submitButtonSelector;
@@ -17,6 +9,8 @@ class FormValidator {
     this._errorClass = formSettings.errorClass;
     this._formElement = formElement;
     this._submitButton = document.querySelector(this._formElement).querySelector(this._submitButtonSelector);
+    this._submitButtonInactive = formSettings.submitButtonInactive;
+    this._inputList = Array.from(document.querySelector(this._formElement).querySelectorAll(this._inputSelector));
   }
 
   //Функция показа предупреждения об ошибке
@@ -70,17 +64,41 @@ class FormValidator {
   //Добавление валидации для форм
 
   enableValidation() {
-    const inputList = Array.from(document.querySelector(this._formElement).querySelectorAll(this._inputSelector));
+    this._toggleButtonState(this._inputList);
 
-    this._toggleButtonState(inputList);
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
-        this._toggleButtonState(inputList);
+        this._toggleButtonState(this._inputList);
       });
     });
   }
+
+  //Функция для удаления стиля поля с ошибкой и сообщения об ошибке
+
+  removeValidationErrors() {
+    const errorMessageList = Array.from(document.querySelector(this._formElement).querySelectorAll('.popup__input-error'));
+    this._inputList.forEach((inputElement) => {
+      inputElement.classList.remove(this._inputErrorClass);
+    });
+    errorMessageList.forEach((inputElement) => {
+      inputElement.classList.remove('popup__input-error_active');
+    });
+  };
+
+  // Функция активации кнопки и изменения стиля
+
+  enableSubmitButton() {
+    this._submitButton.classList.remove(this._submitButtonInactive);
+    this._submitButton.removeAttribute('disabled');
+  }
+
+  // Функция деактивации кнопки и изменения стиля
+
+  disableSubmitButton() {
+    this._submitButton.classList.add(this._submitButtonInactive);
+    this._submitButton.setAttribute('disabled', true);
+  }
 }
 
-export {settings, FormValidator}
+
