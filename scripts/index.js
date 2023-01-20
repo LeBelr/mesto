@@ -1,8 +1,10 @@
+import { initialCards, Card} from './Card.js';
+import {settings, FormValidator } from './FormValidator.js';
+
 const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button'); //Находим кнопку редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //Находим попап
 const popupEditName = popupEditProfile.querySelector('.popup__input_type_edit-profile-name'); //Находим поле ввода имени в попапе
 const profileName = document.querySelector('.profile__name'); //Находим имя профиля на странице
-const popupFormEdit = document.querySelector('.popup__form_type_edit');
 
 const popupEditAbout = popupEditProfile.querySelector('.popup__input_type_edit-profile-about'); //Находим поле ввода о себе в попапе
 const profileAbout = document.querySelector('.profile__about'); //Находим о себе профиля на странице
@@ -23,7 +25,7 @@ function closeByEscape(evt) {
 
 // Функции для открытия и закрытия попапов
 
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape)
 };
@@ -72,8 +74,6 @@ buttonOpenPopupEditProfile.addEventListener('click', () => { //Команда п
   popupFormEditSubmit.removeAttribute('disabled');
 });
 
-
-
 function submitEditProfile(evt) { //Функция для кнопки сохранения
   evt.preventDefault(); //Отмена свойств
   profileName.textContent = popupEditName.value; //Команда, которая будет заменять имя профиля текстом из поля ввода имени в попапе
@@ -83,66 +83,16 @@ function submitEditProfile(evt) { //Функция для кнопки сохр�
 
 popupEditProfile.addEventListener('submit', submitEditProfile); //Команда по клику для кнопки сохранения
 
-// Команда для поиска блока с карточками и шаблона карточки
+// Команда для поиска блока с карточками
 
 const cards = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.cards__item');
 
-// Функция для удаления ближайшего элемента с классом cards__item
-
-cards.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('cards__delete-button')) {
-    evt.target.closest('.cards__item').remove();
-  };
-});
-
-// Функция для изменения лайка
-
-cards.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('cards__like-button')) {
-    evt.target.classList.toggle('cards__like-button_active');
-  };
-});
-
-// Команды для поиска элементов попапа с картинкой
-
-const popupTypeImage = document.querySelector('.popup_type_image');
-const popupImage = document.querySelector('.popup__image');
-const popupImageTitle = document.querySelector('.popup__image-title');
-
-// Функция, в которой клонируется карточка, заполняется содержимым из массива
-
-const generateCard = (dataCard) => {
-  const cardItem = cardTemplate.cloneNode(true);
-  const title = cardItem.querySelector('.cards__title');
-  const image = cardItem.querySelector('.cards__image');
-
-  title.textContent = dataCard.name;
-  image.src = dataCard.link;
-  image.alt = dataCard.name;
-
-  return cardItem;
-};
-
-// Добавление возможности открытия попапа при нажатии на картинку
-
-cards.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('cards__image')) {
-    openPopup(popupTypeImage);
-    popupImage.src = evt.target.closest('.cards__image').src;
-    popupImageTitle.alt = evt.target.closest('.cards__item').querySelector('.cards__title').textContent;
-    popupImageTitle.textContent = evt.target.closest('.cards__item').querySelector('.cards__title').textContent;
-  };
-});
-
-// Команда для отображения карточек на экране
-
-const renderCard = (dataCard) => {
-  cards.append(generateCard(dataCard));
-};
+// Команда для отображения заготовленных карточек
 
 initialCards.forEach((dataCard) => {
-  renderCard(dataCard);
+  const card = new Card(dataCard, '#card-template');
+
+  cards.append(card.generateCard());
 });
 
 // Команды для поиска кнопки добавления карточки, попапа
@@ -170,7 +120,9 @@ buttonOpenPopupAddCard.addEventListener('click', () => {
 // Функция для добавления карточки и ее заполнения
 
 const addCard = (dataCard) => {
-  cards.prepend(generateCard(dataCard));
+  const card = new Card(dataCard, '#card-template');
+
+  cards.prepend(card.generateCard());
 };
 
 const handleAddCard = (evt) => {
@@ -180,3 +132,13 @@ const handleAddCard = (evt) => {
 };
 
 popupAddCard.addEventListener('submit', handleAddCard);
+
+// Подключение валидации
+
+const validationTypeAdd = new FormValidator(settings, '.popup__form_type_add');
+
+validationTypeAdd.enableValidation();
+
+const validationTypeEdit = new FormValidator(settings, '.popup__form_type_edit');
+
+validationTypeEdit.enableValidation();
