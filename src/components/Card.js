@@ -1,18 +1,11 @@
-import { openPopup } from "../utils/utils.js";
-
-// Команды для поиска элементов попапа с картинкой
-
-const popupTypeImage = document.querySelector('.popup_type_image');
-const popupImage = document.querySelector('.popup__image');
-const popupImageTitle = document.querySelector('.popup__image-title');
-
 // Создание класса карточки
 
 export default class Card {
-  constructor (dataCard, templateSelector) {
-    this._title = dataCard.name;
+  constructor( dataCard, {handleCardClick} , templateSelector) {
+    this._title = dataCard.title;
     this._image = dataCard.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   };
 
   // Копирование разметки шаблона карточки
@@ -33,15 +26,6 @@ export default class Card {
     cardImage.alt = this._title;
   };
 
-  // Открытие попапа с картинкой карточки
-
-  _handleOpenPopupTypeImage() {
-    openPopup(popupTypeImage);
-    popupImage.src = this._image;
-    popupImage.alt = this._title;
-    popupImageTitle.textContent = this._title;
-  };
-
   // Удаление карточки
 
   _handleDeleteCard() {
@@ -60,7 +44,7 @@ export default class Card {
 
   _setEventListener() {
     this._card.querySelector('.cards__image').addEventListener('click', () => {
-      this._handleOpenPopupTypeImage();
+      this._handleCardClick();
     });
 
     this._card.querySelector('.cards__delete-button').addEventListener('click', () => {
