@@ -19,11 +19,11 @@ export default class Card {
   };
 
   _setData() {
-    const cardImage = this._card.querySelector('.cards__image');
+    this._cardImage = this._card.querySelector('.cards__image');
 
     this._card.querySelector('.cards__title').textContent = this._title;
-    cardImage.src = this._image;
-    cardImage.alt = this._title;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._title;
   };
 
   // Удаление карточки
@@ -36,14 +36,15 @@ export default class Card {
   // Изменение стиля лайка карточки
 
   _handleLikeCard() {
-    this._card.querySelector('.cards__like-button')
-    .classList.toggle('cards__like-button_active');
+    this._cardLike.classList.toggle('cards__like-button_active');
   };
 
   // Добавление слушателей кнопкам удаления и лайка, картинке карточки
 
   _setEventListener() {
-    this._card.querySelector('.cards__image').addEventListener('click', () => {
+    this._cardLike = this._card.querySelector('.cards__like-button');
+
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick();
     });
 
@@ -51,7 +52,7 @@ export default class Card {
       this._handleDeleteCard();
     });
 
-    this._card.querySelector('.cards__like-button').addEventListener('click', () => {
+    this._cardLike.addEventListener('click', () => {
       this._handleLikeCard();
     });
   };

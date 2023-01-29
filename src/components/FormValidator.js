@@ -61,17 +61,22 @@ export default class FormValidator {
     };
   }
 
-  //Добавление валидации для форм
+  // Функция добавления слушателей для инпутов
 
-  enableValidation() {
-    this._toggleButtonState(this._inputList);
-
+  _setEventListener() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
         this._toggleButtonState(this._inputList);
       });
     });
+  }
+
+  //Добавление валидации для форм
+
+  enableValidation() {
+    this._toggleButtonState(this._inputList);
+    this._setEventListener();
   }
 
   //Функция для удаления стиля поля с ошибкой и сообщения об ошибке

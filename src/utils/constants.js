@@ -6,6 +6,10 @@ const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button
 
 const buttonOpenPopupAddCard = document.querySelector('.profile__add-button');
 
+// Функция для поиска формы редактирования профиля
+
+const popupFormEdit = document.querySelector('.popup__form_type_edit')
+
 const initialCards = [
   {
     title: 'Архыз',
@@ -42,4 +46,4 @@ const settings = {
   submitButtonInactive: 'popup__submit_inactive'
 }
 
-export { initialCards, settings, buttonOpenPopupEditProfile, buttonOpenPopupAddCard };
+export { initialCards, settings, buttonOpenPopupEditProfile, buttonOpenPopupAddCard, popupFormEdit };

@@ -5,24 +5,27 @@ import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import { initialCards, settings, buttonOpenPopupEditProfile, buttonOpenPopupAddCard } from '../utils/constants.js';
+import { initialCards, settings, buttonOpenPopupEditProfile, buttonOpenPopupAddCard, popupFormEdit } from '../utils/constants.js';
+
+function createCard(item) {
+  const card = new Card(
+    item,
+    {
+      handleCardClick: () => {
+        popupWithImage.open(item);
+      }
+    }, '#card-template');
+
+  const cardElement = card.generateCard();
+  return cardElement;
+}
 
 // Создание класса, который отрисовывает карточки
 
 const cards = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(
-      item,
-      {
-        handleCardClick: () => {
-          const popupWithImage = new PopupWithImage('.popup_type_image');
-          popupWithImage.open(item);
-          popupWithImage.setEventListener();
-        }
-      }, '#card-template');
-
-    cards.addItem(card.generateCard());
+    cards.addItem(createCard(item));
   }
 }, '.cards');
 
@@ -48,21 +51,12 @@ const popupTypeEdit = new PopupWithForm({
 const popupTypeAdd = new PopupWithForm({
   popupSelector: '.popup_type_add',
   handleSubmit: (formData) => {
-    const card = new Card(
-      formData,
-      {
-        handleCardClick: () => {
-          const popupWithImage = new PopupWithImage('.popup_type_image');
-          popupWithImage.open(formData);
-          popupWithImage.setEventListener();
-        }
-      },
-      '#card-template');
-
-    cards.addItem(card.generateCard());
+    cards.addItem(createCard(formData));
     popupTypeAdd.close();
   }
 });
+
+const popupWithImage = new PopupWithImage('.popup_type_image');
 
 // Функция отрисовки карточек
 
@@ -77,12 +71,14 @@ validationTypeEdit.enableValidation();
 
 popupTypeEdit.setEventListener();
 popupTypeAdd.setEventListener();
+popupWithImage.setEventListener();
 
 // Функции добавления слушателей кнопкам редактирования профиля и добавления карточки
 
 buttonOpenPopupEditProfile.addEventListener('click', () => {
-  popupTypeEdit.open();
-  userInfo.getUserInfo();
+  popupTypeEdit.open()
+  popupFormEdit.name.value = userInfo.getUserInfo().name;
+  popupFormEdit.about.value = userInfo.getUserInfo().about;
   validationTypeEdit.removeValidationErrors();
   validationTypeEdit.enableSubmitButton();
 });
