@@ -3,6 +3,7 @@
 export default class FormValidator {
   constructor(formSettings, formElement) {
     this._inputSelector = formSettings.inputSelector;
+    this._inputErrorSelector = formSettings.inputErrorSelector;
     this._submitButtonSelector = formSettings.submitButtonSelector;
     this._inactiveButtonClass = formSettings.inactiveButtonClass;
     this._inputErrorClass = formSettings.inputErrorClass;
@@ -82,12 +83,12 @@ export default class FormValidator {
   //Функция для удаления стиля поля с ошибкой и сообщения об ошибке
 
   removeValidationErrors() {
-    const errorMessageList = Array.from(document.querySelector(this._formElement).querySelectorAll('.popup__input-error'));
+    const errorMessageList = Array.from(document.querySelector(this._formElement).querySelectorAll(this._inputErrorSelector));
     this._inputList.forEach((inputElement) => {
       inputElement.classList.remove(this._inputErrorClass);
     });
     errorMessageList.forEach((inputElement) => {
-      inputElement.classList.remove('popup__input-error_active');
+      inputElement.classList.remove(this._errorClass);
     });
   };
 

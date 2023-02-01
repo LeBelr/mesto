@@ -39,6 +39,7 @@ const initialCards = [
 
 const settings = {
   inputSelector: '.popup__input',
+  inputErrorSelector: '.popup__input-error',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_inactive',
   inputErrorClass: 'popup__input_type_error',

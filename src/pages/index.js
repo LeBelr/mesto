@@ -76,9 +76,10 @@ popupWithImage.setEventListener();
 // Функции добавления слушателей кнопкам редактирования профиля и добавления карточки
 
 buttonOpenPopupEditProfile.addEventListener('click', () => {
+  const info = userInfo.getUserInfo();
+
   popupTypeEdit.open()
-  popupFormEdit.name.value = userInfo.getUserInfo().name;
-  popupFormEdit.about.value = userInfo.getUserInfo().about;
+  popupTypeEdit.setInputValues(info);
   validationTypeEdit.removeValidationErrors();
   validationTypeEdit.enableSubmitButton();
 });
