@@ -5,7 +5,8 @@
 .header__logo{background-image:url(a8a2cc376a4f96fe4a17.png);background-repeat:no-repeat;background-size:contain;display:block;height:33px;margin:45px 0 0;width:142px}@media screen and (max-width:1279px){.header__logo{height:24px;margin-left:27px;margin-top:28px;width:104px}}
 .profile{align-items:center;box-sizing:border-box;display:flex;justify-content:space-between;margin:0 auto;max-width:880px;padding:40px 0 50px}@media screen and (max-width:1279px){.profile{padding-left:30px;padding-right:30px}}@media screen and (max-width:599px){.profile{flex-direction:column;gap:33px;padding:42px 19px 36px}}
 .profile__element{display:flex;gap:30px}@media screen and (max-width:599px){.profile__element{align-items:center;flex-direction:column;gap:26px}}
-.profile__avatar{background-image:url(39b60163d3e2339a1788.png);border-radius:50%;height:120px;width:120px}
+.profile__avatar{border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;width:120px}
+.profile__avatar-edit-button{background-color:transparent;border:0;border-radius:50%;display:block;height:120px;padding:0;position:relative;width:120px}.profile__avatar-edit-button:after{background:#000;bottom:0;content:"";left:0;opacity:0;position:absolute;right:0;top:0;transition:opacity .3s linear;z-index:1}.profile__avatar-edit-button:hover:after{background-image:url(6c7bf05444b9793fdf6e.svg);background-position:50%;background-repeat:no-repeat;background-size:26px;cursor:pointer;opacity:.8;z-index:2}
 .profile__info{align-self:center;display:flex;flex-direction:column;gap:7px;position:relative}
 .profile__name{font-size:42px;font-style:normal;font-weight:500;line-height:48px;margin:0;max-width:520px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:1279px){.profile__name{font-size:32px;max-width:280px}}@media screen and (max-width:599px){.profile__name{font-size:27px;line-height:33px;max-width:220px;text-align:center}}
 .profile__about{font-size:18px;font-style:normal;font-weight:400;line-height:22px;margin:0;max-width:520px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:1279px){.profile__about{max-width:280px}}@media screen and (max-width:599px){.profile__about{font-size:14px;line-height:17px;max-width:220px;text-align:center}}
@@ -18,7 +19,9 @@
 .cards__delete-button{background-color:transparent;background-image:url(823b0cf1b0b7e9cb7cad.svg);border:0;height:19px;position:absolute;right:20px;top:20px;transition:opacity .3s linear;width:18px}.cards__delete-button:hover{cursor:pointer;opacity:.6}
 .cards__box-title{align-items:center;background-color:#fff;border-radius:0 0 10px 10px;color:#000;display:flex;height:80px;justify-content:space-between}
 .cards__title{font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0 0 0 21px;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cards__like-button{background-color:#fff;background-image:url(1ad06e85f169668a1f36.svg);border:none;height:19px;margin:0 20px 0 0;transition:opacity .3s linear;width:22px}.cards__like-button:hover{cursor:pointer;opacity:.5}
+.cards__box-like{align-items:center;display:flex;flex-direction:column;margin:0 20px 0 0}
+.cards__like-button{background-color:#fff;background-image:url(1ad06e85f169668a1f36.svg);border:none;height:19px;margin:0 0 3px;transition:opacity .3s linear;width:22px}.cards__like-button:hover{cursor:pointer;opacity:.5}
+.cards__like-count{font-size:13px;font-style:normal;font-weight:400;height:13px;line-height:16px;margin:0;text-align:center;width:10px}
 .cards__like-button_active{background-image:url(35948469632d0421d697.svg)}
 .footer{box-sizing:border-box;margin:0 auto;max-width:880px;padding:0 0 60px}@media screen and (max-width:1279px){.footer{padding-bottom:36px;padding-left:30px;padding-right:30px}}@media screen and (max-width:599px){.footer{padding-left:19px;padding-right:19px}}
 .footer__copyright{color:#545454;font-size:18px;font-style:normal;font-weight:400;line-height:22px;margin:0}@media screen and (max-width:599px){.footer__copyright{font-size:14px;line-height:17px}}
@@ -27,12 +30,14 @@
 .popup__close{background-color:transparent;background-image:url(622e8cdafa2222aa7c54.svg);background-repeat:no-repeat;background-size:contain;border:0;height:32px;padding:0;position:absolute;right:-40px;top:-40px;transition:opacity .3s linear;width:32px}.popup__close:hover{cursor:pointer;opacity:.6}@media screen and (max-width:599px){.popup__close{height:20px;right:0;top:-36px;width:20px}}
 .popup__content{background:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);box-sizing:border-box;color:#000;max-width:430px;padding:34px 36px 37px;position:relative;width:100%}@media screen and (max-width:599px){.popup__content{max-width:282px;padding:25px 22px}}
 .popup__title{font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0 0 36px}@media screen and (max-width:599px){.popup__title{font-size:18px;line-height:22px;margin-bottom:61px}}
+.popup__title_type_delete{margin-bottom:38px}
 
 .popup__input{border:none;border-bottom:1px solid rgba(0,0,0,.2);color:#000;font-size:14px;font-style:normal;font-weight:400;line-height:17px;margin:0 0 5px;padding:11px 0;width:100%}.popup__input:focus{outline:none}
 .popup__input-error{color:red;display:none;font-family:Inter;font-size:12px;font-style:normal;font-weight:400;line-height:15px;min-height:30px}
 .popup__input-error_active{display:block}
 .popup__input_type_error{border-bottom-color:red}
 .popup__submit{background-color:#000;border:0;border-radius:2px;box-sizing:border-box;color:#fff;font-size:18px;font-style:normal;font-weight:400;height:50px;line-height:22px;margin:44px 0 0;padding:0;transition:opacity .3s linear;width:100%}.popup__submit:hover{cursor:pointer;opacity:.8}@media screen and (max-width:599px){.popup__submit{font-size:14px;line-height:17px;margin-top:42px}}
+.popup__submit_type_delete{margin-top:0}
 .popup__submit_inactive{background-color:#fff;border:1px solid #000;color:#000;opacity:.2}.popup__submit_inactive:hover{cursor:default;opacity:.2}
 .popup_type_image{background-color:rgba(0,0,0,.9)}
 .popup__image-box{position:relative}
