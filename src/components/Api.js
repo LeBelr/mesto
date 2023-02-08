@@ -11,16 +11,11 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  _getErr(err) {
-    console.log(err);
-  }
-
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   getInitialCards() {
@@ -28,7 +23,6 @@ export default class Api {
       headers: this._headers
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   editProfile(data) {
@@ -38,7 +32,6 @@ export default class Api {
       body: JSON.stringify(data)
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   createCard(item) {
@@ -48,7 +41,6 @@ export default class Api {
       body: JSON.stringify(item)
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   handleDeleteCard(cardId) {
@@ -57,7 +49,6 @@ export default class Api {
       method: 'DELETE'
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   handleLikeCard(cardId) {
@@ -66,7 +57,6 @@ export default class Api {
       method: 'PUT'
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   handleDeleteLikeCard(cardId) {
@@ -75,7 +65,6 @@ export default class Api {
       method: 'DELETE'
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 
   changeAvatar(data) {
@@ -85,6 +74,5 @@ export default class Api {
       body: JSON.stringify(data)
     })
       .then(this._getRes)
-      .catch(this._getErr);
   }
 }

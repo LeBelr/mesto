@@ -186,4 +186,6 @@ buttonOpenPopupAddCard.addEventListener('click', () => {
 
 profileAvatar.addEventListener('click', () => {
   popupTypeAvatar.open();
+  validationTypeAvatar.removeValidationErrors();
+  validationTypeAvatar.disableSubmitButton();
 })

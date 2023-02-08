@@ -44,11 +44,9 @@ export default class FormValidator {
 
   _toggleButtonState(inputList) {
     if (this._hasInvalidInput(inputList)) {
-      this._submitButton.classList.add(this._inactiveButtonClass);
-      this._submitButton.setAttribute('disabled', true);
+      this.disableSubmitButton();
     } else {
-      this._submitButton.classList.remove(this._inactiveButtonClass);
-      this._submitButton.removeAttribute('disabled');
+      this.enableSubmitButton();
     };
   }
 
@@ -83,12 +81,8 @@ export default class FormValidator {
   //Функция для удаления стиля поля с ошибкой и сообщения об ошибке
 
   removeValidationErrors() {
-    const errorMessageList = Array.from(document.querySelector(this._formElement).querySelectorAll(this._inputErrorSelector));
     this._inputList.forEach((inputElement) => {
-      inputElement.classList.remove(this._inputErrorClass);
-    });
-    errorMessageList.forEach((inputElement) => {
-      inputElement.classList.remove(this._errorClass);
+      this._hideInputError(inputElement);
     });
   };
 
