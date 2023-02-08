@@ -6,36 +6,10 @@ const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button
 
 const buttonOpenPopupAddCard = document.querySelector('.profile__add-button');
 
-// Функция для поиска формы редактирования профиля
+// Функция для поиска кнопки добавления карточки, попапа
+const profileAvatar = document.querySelector('.profile__avatar-edit-button');
 
-const popupFormEdit = document.querySelector('.popup__form_type_edit')
-
-const initialCards = [
-  {
-    title: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    title: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    title: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    title: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    title: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    title: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+// Данные настроек для валидации
 
 const settings = {
   inputSelector: '.popup__input',
@@ -47,4 +21,4 @@ const settings = {
   submitButtonInactive: 'popup__submit_inactive'
 }
 
-export { initialCards, settings, buttonOpenPopupEditProfile, buttonOpenPopupAddCard, popupFormEdit };
+export { settings, buttonOpenPopupEditProfile, buttonOpenPopupAddCard, profileAvatar };
